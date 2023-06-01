@@ -1,7 +1,10 @@
+import 'package:favorite_places/screens/places_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 ThemeData darkTheme = ThemeData.dark().copyWith(
   useMaterial3: true,
@@ -11,6 +14,17 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     surface: const Color.fromARGB(255, 80, 51, 59),
   ),
   scaffoldBackgroundColor: const Color.fromARGB(255, 50, 58, 60),
+  textTheme: GoogleFonts.ubuntuCondensedTextTheme().copyWith(
+    titleSmall: GoogleFonts.ubuntuCondensed(
+      fontWeight: FontWeight.bold,
+    ),
+    titleMedium: GoogleFonts.ubuntuCondensed(
+      fontWeight: FontWeight.bold,
+    ),
+    titleLarge: GoogleFonts.ubuntuCondensed(
+      fontWeight: FontWeight.bold,
+    ),
+  ),
 );
 
 ThemeData lightTheme = ThemeData.dark().copyWith(
@@ -21,6 +35,17 @@ ThemeData lightTheme = ThemeData.dark().copyWith(
     surface: const Color.fromARGB(255, 200, 100, 100),
   ),
   scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
+  textTheme: GoogleFonts.ubuntuCondensedTextTheme().copyWith(
+    titleSmall: GoogleFonts.ubuntuCondensed(
+      fontWeight: FontWeight.bold,
+    ),
+    titleMedium: GoogleFonts.ubuntuCondensed(
+      fontWeight: FontWeight.bold,
+    ),
+    titleLarge: GoogleFonts.ubuntuCondensed(
+      fontWeight: FontWeight.bold,
+    ),
+  ),
 );
 
 class MyApp extends StatelessWidget {
@@ -31,9 +56,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'NH\'s Groceries',
+      title: 'Gr8t Places',
       theme: darkTheme,
-      home: ,
+      home: const PlacesScreen(),
     );
   }
 }
