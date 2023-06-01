@@ -37,6 +37,7 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
         margin: const EdgeInsets.all(10),
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               "You have no saved places yet.",

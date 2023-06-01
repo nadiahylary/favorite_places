@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../models/place.dart';
 
@@ -18,9 +17,7 @@ class _NewPlaceScreenState extends State<NewPlaceScreen> {
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
         Place newPlace = Place(
-          id: DateTime.now().toString(),
           name: _enteredName,
-
         );
         Navigator.of(context).pop(
             newPlace
@@ -32,7 +29,7 @@ class _NewPlaceScreenState extends State<NewPlaceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("New Grocery Item"),
+        title: const Text("New Place"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -46,6 +43,7 @@ class _NewPlaceScreenState extends State<NewPlaceScreen> {
                     maxLength: 50,
                     decoration: const InputDecoration(
                       label: Text("Name"),
+                      //labelText: "Name",
                     ),
                     validator: (value){
                       if(value == null || value.isEmpty || value.trim().length <= 1 || value.trim().length > 50){

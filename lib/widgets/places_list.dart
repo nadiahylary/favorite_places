@@ -7,15 +7,26 @@ import '../models/place.dart';
 import '../screens/new_place.dart';
 
 
-class PlacesList extends StatefulWidget {
+class PlacesList extends ConsumerStatefulWidget {
   const PlacesList(this._places, {Key? key}) : super(key: key);
   final List<Place> _places;
 
   @override
-  State<PlacesList> createState() => _PlacesListState();
+  ConsumerState<PlacesList> createState() => _PlacesListState();
 }
 
-class _PlacesListState extends State<PlacesList> {
+class _PlacesListState extends ConsumerState<PlacesList> {
+
+  /*void newPlaceScreen() async {
+    final newPlaceItem = await Navigator.of(context).push<Place>(
+        MaterialPageRoute(builder: (ctx) => const NewPlaceScreen()));
+    if(newPlaceItem == null){
+      return;
+    }
+    setState(() {
+      widget._places.add(newPlaceItem);
+    });
+  }*/
 
   void _deleteGroceryItem(Place place) async {
     final placeIndex = widget._places.indexOf(place);
@@ -55,7 +66,9 @@ class _PlacesListState extends State<PlacesList> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PlaceDetailScreen(place: widget._places[index])));
             },
-            child: Text(widget._places[index].name),
+            child: Text(widget._places[index].name, style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.primary
+            ),),
           ),
         );
       },

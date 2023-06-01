@@ -3,10 +3,10 @@ import 'models/place.dart';
 
 class PlacesNotifier extends StateNotifier<List<Place>>{
   PlacesNotifier(): super(
-      []
+     []
   );
 
-  bool toggleMealFavoriteStatus(Place place){
+  /*bool addPlaceToPlaces(Place place){
     final contains = state.contains(place);
     if(contains){
       state = state.where((element) => element.id != place.id).toList();
@@ -17,6 +17,10 @@ class PlacesNotifier extends StateNotifier<List<Place>>{
       return true;
     }
 
+  }*/
+
+  void addPlace(Place place){
+    state = [...state, place];
   }
 
 }

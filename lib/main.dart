@@ -19,10 +19,12 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
       fontWeight: FontWeight.bold,
     ),
     titleMedium: GoogleFonts.ubuntuCondensed(
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w600,
+      fontSize: 16,
     ),
     titleLarge: GoogleFonts.ubuntuCondensed(
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w500,
+      fontSize: 18,
     ),
   ),
 );
@@ -38,12 +40,15 @@ ThemeData lightTheme = ThemeData.dark().copyWith(
   textTheme: GoogleFonts.ubuntuCondensedTextTheme().copyWith(
     titleSmall: GoogleFonts.ubuntuCondensed(
       fontWeight: FontWeight.bold,
+      fontSize: 16,
     ),
     titleMedium: GoogleFonts.ubuntuCondensed(
       fontWeight: FontWeight.bold,
+      fontSize: 18
     ),
     titleLarge: GoogleFonts.ubuntuCondensed(
       fontWeight: FontWeight.bold,
+      fontSize: 20,
     ),
   ),
 );
