@@ -10,7 +10,7 @@ class PlaceDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Gr8t Places"),
+        title: Text(place.name),
       ),
       body: Center(
         child: Text(

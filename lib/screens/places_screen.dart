@@ -26,9 +26,10 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
       if(newPlaceItem == null){
         return;
       }
-      setState(() {
+      ref.read(placesProvider.notifier).addPlace(newPlaceItem);
+      /*setState(() {
         placesList.add(newPlaceItem);
-      });
+      });*/
     }
 
     Widget mainContent = Center(

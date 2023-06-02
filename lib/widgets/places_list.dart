@@ -17,17 +17,6 @@ class PlacesList extends ConsumerStatefulWidget {
 
 class _PlacesListState extends ConsumerState<PlacesList> {
 
-  /*void newPlaceScreen() async {
-    final newPlaceItem = await Navigator.of(context).push<Place>(
-        MaterialPageRoute(builder: (ctx) => const NewPlaceScreen()));
-    if(newPlaceItem == null){
-      return;
-    }
-    setState(() {
-      widget._places.add(newPlaceItem);
-    });
-  }*/
-
   void _deleteGroceryItem(Place place) async {
     final placeIndex = widget._places.indexOf(place);
     setState(() {
@@ -62,14 +51,14 @@ class _PlacesListState extends ConsumerState<PlacesList> {
             _deleteGroceryItem( widget._places[index]);
           },
           key: ObjectKey(widget._places[index]),
-          child: TextButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PlaceDetailScreen(place: widget._places[index])));
-            },
-            child: Text(widget._places[index].name, style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: Theme.of(context).colorScheme.primary
-            ),),
-          ),
+          child: ListTile(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PlaceDetailScreen(place: widget._places[index])));
+              },
+              title: Text(widget._places[index].name, style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: Theme.of(context).colorScheme.primary
+              ),),
+            ),
         );
       },
       itemCount: widget._places.length,

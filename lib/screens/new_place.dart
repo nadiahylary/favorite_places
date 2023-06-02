@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/place.dart';
+import '../places_provider.dart';
 
-class NewPlaceScreen extends StatefulWidget {
+class NewPlaceScreen extends ConsumerStatefulWidget {
   const NewPlaceScreen({Key? key}) : super(key: key);
 
   @override
-  State<NewPlaceScreen> createState() => _NewPlaceScreenState();
+  ConsumerState<NewPlaceScreen> createState() => _NewPlaceScreenState();
 }
 
-class _NewPlaceScreenState extends State<NewPlaceScreen> {
+class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   final _formKey = GlobalKey<FormState>();
   String _enteredName = '';
 
@@ -16,12 +18,11 @@ class _NewPlaceScreenState extends State<NewPlaceScreen> {
   void _savePlace() async{
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
-        Place newPlace = Place(
-          name: _enteredName,
-        );
-        Navigator.of(context).pop(
-            newPlace
-        );
+      Place newPlace = Place(
+        name: _enteredName,
+      );
+      Navigator.of(context).pop(
+          newPlace);
     }
   }
 
