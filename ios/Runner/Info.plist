@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string></string>
+    <string>Allow location access to keep your favorite place's address.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Allow file access to pick your favorite place image.</string>
     <key>NSCameraUsageDescription</key>
