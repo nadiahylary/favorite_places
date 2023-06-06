@@ -1,5 +1,5 @@
 
-import 'package:favorite_places/places_provider.dart';
+import 'package:favorite_places/providers/places_provider.dart';
 import 'package:favorite_places/screens/place_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,13 +52,20 @@ class _PlacesListState extends ConsumerState<PlacesList> {
           },
           key: ObjectKey(widget._places[index]),
           child: ListTile(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PlaceDetailScreen(place: widget._places[index])));
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PlaceDetailScreen(place: widget._places[index])));
               },
-              title: Text(widget._places[index].name, style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.primary
-              ),),
+            leading: CircleAvatar(
+                radius: 30,
+                backgroundImage: FileImage(widget._places[index].image, )
             ),
+            title: Text(
+              widget._places[index].name,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: Theme.of(context).colorScheme.primary
+              ),
+            ),
+          ),
         );
       },
       itemCount: widget._places.length,

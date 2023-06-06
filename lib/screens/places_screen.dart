@@ -1,5 +1,5 @@
 
-import 'package:favorite_places/places_provider.dart';
+import 'package:favorite_places/providers/places_provider.dart';
 import 'package:favorite_places/widgets/places_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,7 +49,10 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
     );
 
     if (placesList.isNotEmpty) {
-      mainContent = PlacesList(placesList);
+      mainContent = Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: PlacesList(placesList),
+      );
     }
 
     return Scaffold(
@@ -62,7 +65,6 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
               Icons.add,
               size: 30,
             ),
-
           ),
         ],
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'models/place.dart';
+import '../models/place.dart';
 
 class PlacesNotifier extends StateNotifier<List<Place>>{
   PlacesNotifier(): super(
