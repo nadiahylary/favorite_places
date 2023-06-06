@@ -39,8 +39,9 @@ dependencies:
   intl: ^0.18.1
   transparent_image: ^2.0.1
   flutter_riverpod: ^2.3.6
-  http: ^1.0.0
   uuid: ^3.0.7
+  image_picker: ^0.8.7+5
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:
