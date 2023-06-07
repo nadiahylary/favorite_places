@@ -42,7 +42,8 @@ dependencies:
   uuid: ^3.0.7
   image_picker: ^0.8.7+5
   http: ^0.13.6
-  location: ^4.4.0
+  #location: ^4.4.0
+  location: ^5.0.0-dev.8
 
 dev_dependencies:
   flutter_test:

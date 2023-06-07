@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/place.dart';
 import '../providers/places_provider.dart';
 import '../widgets/image_input.dart';
+import '../widgets/location_input.dart';
 
 class NewPlaceScreen extends ConsumerStatefulWidget {
   const NewPlaceScreen({Key? key}) : super(key: key);
@@ -68,6 +69,10 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                     ImageInput(onPickImage: (image){
                       _enteredImage = image;
                     },),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const LocationInput(),
                     const SizedBox(
                       height: 35,
                     ),
