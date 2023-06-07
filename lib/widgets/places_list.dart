@@ -65,6 +65,12 @@ class _PlacesListState extends ConsumerState<PlacesList> {
                 color: Theme.of(context).colorScheme.primary
               ),
             ),
+            subtitle: Text(
+              widget._places[index].placeLocation.formattedAddress,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground
+              ),
+            ),
           ),
         );
       },

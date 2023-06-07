@@ -18,6 +18,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   final _formKey = GlobalKey<FormState>();
   String _enteredName = '';
   File? _enteredImage;
+  PlaceLocation? _placeLocation;
 
 
   void _savePlace() async{
@@ -26,6 +27,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
       Place newPlace = Place(
         name: _enteredName,
         image: _enteredImage!,
+        placeLocation: _placeLocation!
       );
       Navigator.of(context).pop(
           newPlace);
@@ -72,7 +74,9 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const LocationInput(),
+                    LocationInput(onPickLocation: (location){
+                      _placeLocation = location;
+                    },),
                     const SizedBox(
                       height: 35,
                     ),
