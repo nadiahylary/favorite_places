@@ -22,6 +22,7 @@ class Place{
     required this.name,
     required this.image,
     required this.placeLocation,
-  }):id = uuid.v4();
+    String? id
+  }):id = id ?? uuid.v4();
 
 }

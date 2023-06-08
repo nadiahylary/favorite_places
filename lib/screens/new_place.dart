@@ -1,10 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/place.dart';
 import '../widgets/image_input.dart';
 import '../widgets/location_input.dart';
+import 'package:path_provider/path_provider.dart' as syspath;
+import 'package:path/path.dart' as path;
+import 'package:sqflite/sqflite.dart' as sql;
+import 'package:sqflite/sqlite_api.dart';
 
 class NewPlaceScreen extends ConsumerStatefulWidget {
   const NewPlaceScreen({Key? key}) : super(key: key);
@@ -26,11 +29,16 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
       if(_placeLocation == null || _enteredImage == null){
         return;
       }
+      final appDir = await syspath.getApplicationSupportDirectory();
+      final imageName = path.basename(_enteredImage!.path);
+      final copiedImage = await _enteredImage!.copy('${appDir.path}/$imageName}');
+
       Place newPlace = Place(
           name: _enteredName,
-          image: _enteredImage!,
+          image: copiedImage,
           placeLocation: _placeLocation!
       );
+
       Navigator.of(context).pop(newPlace);
     }
   }

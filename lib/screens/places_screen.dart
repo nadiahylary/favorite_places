@@ -15,11 +15,17 @@ class PlacesScreen extends ConsumerStatefulWidget {
 }
 
 class _PlacesScreenState extends ConsumerState<PlacesScreen> {
+  late Future<void> _placesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _placesFuture = ref.read(placesProvider.notifier).loadPlaces();
+  }
 
   @override
   Widget build(BuildContext context) {
     final placesList = ref.watch(placesProvider);
-
     void newPlaceScreen() async {
       final newPlaceItem = await Navigator.of(context).push<Place>(
           MaterialPageRoute(builder: (ctx) => const NewPlaceScreen()));
@@ -27,9 +33,6 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
         return;
       }
       ref.read(placesProvider.notifier).addPlace(newPlaceItem);
-      /*setState(() {
-        placesList.add(newPlaceItem);
-      });*/
     }
 
     Widget mainContent = Center(
@@ -48,10 +51,17 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
       ),
     );
 
+
     if (placesList.isNotEmpty) {
       mainContent = Padding(
         padding: const EdgeInsets.all(8.0),
-        child: PlacesList(placesList),
+        child: FutureBuilder(
+            future: _placesFuture,
+            builder: (context, snapshot) => snapshot.connectionState == ConnectionState.waiting ?
+            const Center(
+              child: CircularProgressIndicator(),)
+            : PlacesList(placesList)
+        ),
       );
     }
 
