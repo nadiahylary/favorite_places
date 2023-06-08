@@ -41,14 +41,8 @@ dependencies:
   flutter_riverpod: ^2.3.6
   uuid: ^3.0.7
   image_picker: ^0.8.7+5
-  http: ^0.13.6
+  http: ^1.0.0
   location: ^4.4.0
-  # location: ^5.0.0-dev.8
-#  location:
-#    git:
-#      url: https://github.com/781flyingdutchman/flutterlocation.git
-#      ref: V4
-#      path: packages/location
   google_maps_flutter: ^2.3.0
   path_provider: ^2.0.15
   path: ^1.8.3
