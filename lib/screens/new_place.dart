@@ -6,8 +6,7 @@ import '../widgets/image_input.dart';
 import '../widgets/location_input.dart';
 import 'package:path_provider/path_provider.dart' as syspath;
 import 'package:path/path.dart' as path;
-import 'package:sqflite/sqflite.dart' as sql;
-import 'package:sqflite/sqlite_api.dart';
+
 
 class NewPlaceScreen extends ConsumerStatefulWidget {
   const NewPlaceScreen({Key? key}) : super(key: key);
