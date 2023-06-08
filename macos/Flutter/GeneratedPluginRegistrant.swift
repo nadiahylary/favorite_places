@@ -5,7 +5,7 @@
 import FlutterMacOS
 import Foundation
 
-import location_macos
+import location
 import path_provider_foundation
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

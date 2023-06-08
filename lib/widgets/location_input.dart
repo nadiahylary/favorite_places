@@ -22,25 +22,45 @@ class _LocationInputState extends State<LocationInput> {
     if(_pickedLocation == null){
       return '';
     }
-    // max's : center=${place.placeLocation.latitude},${place.placeLocation.longitude}
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=${_pickedLocation!.formattedAddress}&zoom=16&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C${_pickedLocation!.latitude},${_pickedLocation!.longitude}&key=AIzaSyC_pmjURTHAF2LOdZltYmq1AMVuQ8nd4sU';
+    // max's : center=${_pickedLocation!.latitude},${_pickedLocation!.longitude}
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=${_pickedLocation!.latitude},${_pickedLocation!.longitude}&zoom=16&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C${_pickedLocation!.latitude},${_pickedLocation!.longitude}&key=AIzaSyC_pmjURTHAF2LOdZltYmq1AMVuQ8nd4sU';
   }
 
   void _getCurrentLocation() async {
+    Location location = new Location();
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+    LocationData locationData;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
 
     setState(() {
       _isLoadingLocation = true;
     });
 
-    LocationData locationData = await getLocation();
-    final latitude = locationData.latitude;
-    final longitude = locationData.longitude;
+    locationData = await location.getLocation();
+    final latitude_ = locationData.latitude;
+    final longitude_ = locationData.longitude;
 
-    if(latitude == null || longitude == null){
+    if(latitude_ == null || longitude_ == null){
       return;
     }
 
-    final url = Uri.parse('https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyC_pmjURTHAF2LOdZltYmq1AMVuQ8nd4sU');
+    final url = Uri.parse('https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude_,$longitude_&key=AIzaSyC_pmjURTHAF2LOdZltYmq1AMVuQ8nd4sU');
 
     final response = await http.get(url);
     final responseData = json.decode(response.body);
@@ -48,13 +68,14 @@ class _LocationInputState extends State<LocationInput> {
 
     setState(() {
       _pickedLocation = PlaceLocation(
-          latitude: latitude,
-          longitude: longitude,
+          latitude: latitude_,
+          longitude: longitude_,
           formattedAddress: address
       );
       _isLoadingLocation = false;
     });
     print("Location: ${locationData.latitude}, ${locationData.longitude}");
+    widget.onPickLocation(_pickedLocation!);
 
   }
 

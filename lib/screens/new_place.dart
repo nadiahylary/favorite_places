@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/place.dart';
-import '../providers/places_provider.dart';
 import '../widgets/image_input.dart';
 import '../widgets/location_input.dart';
 
@@ -20,17 +19,19 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   File? _enteredImage;
   PlaceLocation? _placeLocation;
 
-
-  void _savePlace() async{
-    if(_formKey.currentState!.validate()){
+  void _savePlace() async {
+    if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      print(_placeLocation);
+      if(_placeLocation == null || _enteredImage == null){
+        return;
+      }
       Place newPlace = Place(
-        name: _enteredName,
-        image: _enteredImage!,
-        placeLocation: _placeLocation!
+          name: _enteredName,
+          image: _enteredImage!,
+          placeLocation: _placeLocation!
       );
-      Navigator.of(context).pop(
-          newPlace);
+      Navigator.of(context).pop(newPlace);
     }
   }
 
@@ -55,28 +56,35 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                         label: Text("Name"),
                         //labelText: "Name",
                       ),
-                      validator: (value){
-                        if(value == null || value.isEmpty || value.trim().length <= 1 || value.trim().length > 50){
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.trim().length <= 1 ||
+                            value.trim().length > 50) {
                           return "Please enter a name of 2 to 50 characters long";
                         }
                         return null;
                       },
-                      onSaved: (value){
+                      onSaved: (value) {
                         _enteredName = value!;
                       },
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    ImageInput(onPickImage: (image){
-                      _enteredImage = image;
-                    },),
+                    ImageInput(
+                      onPickImage: (image) {
+                        _enteredImage = image;
+                      },
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    LocationInput(onPickLocation: (location){
-                      _placeLocation = location;
-                    },),
+                    LocationInput(
+                      onPickLocation: (location) {
+                        _placeLocation = location;
+                      },
+                    ),
                     const SizedBox(
                       height: 35,
                     ),
@@ -84,7 +92,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
-                            onPressed: (){
+                            onPressed: () {
                               Navigator.of(context).pop();
                             },
                             child: const Text("Cancel")),
@@ -92,7 +100,7 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                           width: 35,
                         ),
                         TextButton(
-                            onPressed: (){
+                            onPressed: () {
                               _formKey.currentState!.reset();
                             },
                             child: const Text("Reset")),
@@ -101,14 +109,12 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                         ),
                         ElevatedButton(
                             onPressed: _savePlace,
-                            child: const Text("Add Place")
-                        ),
+                            child: const Text("Add Place")),
                       ],
                     ),
                   ],
                 ),
-              )
-          ),
+              )),
         ),
       ),
     );

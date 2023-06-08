@@ -42,9 +42,15 @@ dependencies:
   uuid: ^3.0.7
   image_picker: ^0.8.7+5
   http: ^0.13.6
-  #location: ^4.4.0
-  location: ^5.0.0-dev.8
+  location: ^4.4.0
+  # location: ^5.0.0-dev.8
+#  location:
+#    git:
+#      url: https://github.com/781flyingdutchman/flutterlocation.git
+#      ref: V4
+#      path: packages/location
   google_maps_flutter: ^2.3.0
+
 
 dev_dependencies:
   flutter_test:
